@@ -15,6 +15,9 @@ export default {
     
     methods: {
         // Add code here
+        changeColor(){
+            this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length;
+        }
 
     }
 }
@@ -39,7 +42,7 @@ export default {
             <input id="imageUrl" v-model="imageUrl" placeholder="https://example.com/me.jpg"><br><br>
 
             <label>Theme Presets:</label><br>
-            <button class="theme-button">Cycle theme</button> <!-- click button to cycle through the themes -->
+            <button class="theme-button" :class="themes[currentThemeIndex]" @click="changeColor">Cycle theme</button> <!-- click button to cycle through the themes -->
             <!-- Dark theme: background-color: #333, text-color: #fff -->
             <!-- Light theme: background-color: #fff, text-color: #000  -->
             <!-- Neon theme: background-color: #39ff14, text-color: #000 -->
@@ -48,7 +51,7 @@ export default {
         <!-- Preview Section -->
         <div class="preview-section">
             <h2>Live Preview</h2>
-            <div class="preview-card"> <!-- Add code here to set background color and text color -->
+            <div class="preview-card" :class="themes[currentThemeIndex]"> <!-- Add code here to set background color and text color -->
                 <img :src="imageUrl" class="preview-img">
                 <h3>{{ name || 'Your Name' }}</h3>
                 <h4>{{ job || 'Job Title' }}</h4>
@@ -93,5 +96,17 @@ export default {
         border: none;
         border-radius: 4px;
         cursor: pointer;
+    }
+    .dark {
+        background-color: #333;
+        color: #fff;
+    }
+    .light {
+        background-color: #fff;
+        color: #000;
+    }
+    .neon {
+        background-color: #39ff14;
+        color: #000;
     }
 </style>
